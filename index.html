@@ -61,7 +61,7 @@
 			<h1 class="h2_home wow fadeIn" data-wow-delay="0.4s">Dataset Cleaning</h1>
 			<h3 class="h3_home wow fadeIn" data-wow-delay="0.6s">Cleaning a dataset about alternative fuel stations in New York</h3>
 			<ul class="list-inline intro-social-buttons">
-				<li id="download" ><a href="#downloadlink" class="btn  btn-lg mybutton_standard wow swing wow fadeIn" data-wow-delay="1.2s"><span class="network-name">Go to code</span></a>
+				<li id="download" ><a href="https://github.com/pchivaru/data-cleaning/blob/main/Alternative_Fuel_Stations_in_New_York.ipynb" class="btn  btn-lg mybutton_standard wow swing wow fadeIn" data-wow-delay="1.2s"><span class="network-name">Go to code</span></a>
 				</li>
 			</ul>
 		</div>    
@@ -89,10 +89,10 @@
 			<div class="collapse navbar-collapse navbar-right navbar-ex1-collapse">
 				<ul class="nav navbar-nav">
 					
-					<li class="menuItem"><a href="#whatis">Prerequisites</a></li>
-					<li class="menuItem"><a href="#useit">Exploration</a></li>
-					<li class="menuItem"><a href="#screen">Cleaning</a></li>
-					<li class="menuItem"><a href="#credits">Visualizaton</a></li>
+					<li class="menuItem"><a href="#pre">Prerequisites</a></li>
+					<li class="menuItem"><a href="#exp">Exploration</a></li>
+					<li class="menuItem"><a href="#cle">Cleaning</a></li>
+					<li class="menuItem"><a href="#viz">Visualizaton</a></li>
 				</ul>
 			</div>
 		   
@@ -114,73 +114,149 @@
 			
 		</div>
 		<div class="container">
-		<p>	Alternative fuels, such as electric, hydrogen, and natural gas, are increasingly becoming popular as a more sustainable and environmentally
+		<p>
+			Alternative fuels, such as electric, hydrogen, and natural gas, are increasingly becoming popular as a more sustainable and environmentally
 			friendly source of energy. It is important for car owners to have access to reliable information of the locations and characteristics of
 			fuel stations that can satisify their needs. Moreover, for data scientists, having access to clean data about this type of fuel stations
 			can be useful for application such as optimal stations locations. 
-			
+		</p>
+		<p>	
 			In this case we will tidy up a dataset extracted from the <a href="https://data.ny.gov/Energy-Environment/Alternative-Fuel-Stations-in-New-York-Map/bfn6-ppz4">official website</a> 
 			of New York State. Like most public datasets, the information regarding these stations is incomplete, contains format errors, which can make it difficult to
 			analyze or use the data effectively. In this article, we will explore the process of cleaning a dataset, discussing the common issues
 			that may arise and the techniques that can be used to address them.
-
+		</p>
+		<p>
 			Although the main part of this article will be focused on the cleaning of the dataset, a brief exploration will be proposed aswell as 
 			some geospatial visualizations at the end to make the process more interesting and give it some context.
 		</p>
 
 		<br>
 		<h4>Prerequisites</h4>
-		<p>
-			We will start by importing the necessary libraries. Those are pandas, to handle the data; re to manipulate strings using regular expressions
-			and plotly.express for geospatial visualization purposes.
-		</p>
+		<div id="pre">
+			<p>
+				We will start by importing the necessary libraries. Those are pandas, to handle the data; re to manipulate strings using regular expressions
+				and plotly.express for geospatial visualization purposes.
+			</p>
 
-		<img class="img-responsive " src="img/pre1.png" alt="">
-		<p>
-			Secondly we will load the data to the notebook, and the load it to a pandas dataframe
-		</p>
-		<img class="img-responsive " src="img/pre2.png" alt="">
+			<img class="img-responsive " src="img/pre1.png" alt="">
+			<p>
+				Secondly we will load the data to the notebook, and the load it to a pandas dataframe
+			</p>
+			<img class="img-responsive " src="img/pre2.png" alt="">
+		</div>
 
-		<h4>Exploration</h4>
-		<p>
-			Next step is to explore briefly the dataset to have an idea of which the main problems are and start to think on how to address them.
-			The sample method is useful to get a quick view of some random rows of the dataset.
-		</p>
-		<img class="img-responsive " src="img/exp0.png" alt="">
-		<p>
-			However, using the info method provides more useful information such as the number of non-null variables per colums, the data type of each 
-			variable or the dimensions of the matrix			
-		</p>
-		<img class="img-responsive " src="img/exp1.png" alt="">
-		<img class="img-responsive " src="img/exp2.png" alt="">
-		<img class="img-responsive " src="img/exp4.png" alt="">
+		<br>
+		<div id="exp">
+			<h4>Exploration</h4>
+			<p>
+				Next step is to explore briefly the dataset to have an idea of which the main problems are and start to think on how to address them.
+				The sample method is useful to get a quick view of some random rows of the dataset.
+			</p>
+			<img class="img-responsive " src="img/exp0.png" alt="">
+			<p>
+				However, using the info method provides more useful information such as the number of non-null variables per colums, the data type of each 
+				variable or the dimensions of the matrix			
+			</p>
+			<img class="img-responsive " src="img/exp1.png" alt="">
+			<p>
+				It is important to analyze which variables have a high proportion of null values. We use the mean instead of the sum as it shows more 
+				useful information.	For example, all the values of the variable Expected Date are null values.
+			</p>
+			<img class="img-responsive " src="img/exp4.png" alt="">
+			<p>
+				Finally, from those columns that present at least one non-null value, we will list the number of distinct values per variable. The State 
+				variables only has one values (NY) as the datases only contains data of one state. Therefore this variable must be filtered out, as it 
+				does not provide any useful information.
+			</p>
+			<img class="img-responsive " src="img/exp2.png" alt="">
+			<p>
+				Visualization tools can also be used during the exploration process. In this case, plotting all the data points within a map allows use to
+				observe that some point have incorrec geographical coordinates. Note that some minor adjustments have been done to the dataset so the 
+				library detected correctly the longitude and the latitude.
+			</p>
+			<img class="img-responsive " src="img/exp5.png" alt="">
+			<img class="img-responsive " src="img/exp6.png" alt="">
+		</div>
+		<br>
 		
+		<div id="cle">
+			<h4>Cleaning</h4>
+			<p>
+				Once the exploration of the dataset is complete and the main issues are located, it is time to start with the cleaning process. It is
+				important to note that new issues will probably come out after the initial exploration and would need to be address simultaneously with
+				the cleaning process.
+			</p>
+			<p>
+				During the cleaning proccess we will make use of method chaining, this way our code will be more clear and the dataframe will not be
+				modified until we end the cleaning process.
+			</p>
+			
+			
+			<ol>
+				<li>1. We select those columns that are of interest for future analysis
+					<img class="img-responsive " src="img/cle4.png" alt="">
+				</li>
+				
+				<li>2. In order to facilitate the use of the assign method later, we will substitute the white spaces of the variables' names for underscores.
+					<img class="img-responsive " src="img/cle5.png" alt="">
+				</li>
 
-		<h4>Cleaning</h4>
-		<p>
-			Once the exploration of the dataset is complete and the main issues are located, it is time to start with the cleaning process. It is
-			important to note that new issues will probably come out after the initial exploration and would need to be address simultaneously with
-			the cleaning process.
-		</p>
-		<img class="img-responsive " src="img/cle1.png" alt="">
-		<img class="img-responsive " src="img/cle2.png" alt="">
-		<img class="img-responsive " src="img/cle3.png" alt="">
-		<img class="img-responsive " src="img/cle4.png" alt="">
-		<img class="img-responsive " src="img/cle5.png" alt="">
-		<img class="img-responsive " src="img/cle6.png" alt="">
-		<img class="img-responsive " src="img/cledrop.png" alt="">
-		<img class="img-responsive " src="img/cle7.png" alt="">
-		<img class="img-responsive " src="img/cle8.png" alt="">
-		<img class="img-responsive " src="img/cle9.png" alt="">
+				<li>3. We fill the missing values for the EV_Network (electric vehicle network) and the EV_Connector (electric vehicle connector)
+					as they only appear in those fuel stations that offer and non-electric alternative fuel. To do so, a dictionary is defined with the filling 
+					values for each variable.
+					<img class="img-responsive " src="img/cle2.png" alt="">
+					<img class="img-responsive " src="img/cle6.png" alt="">
+				</li>
 
-		<h4>Visualization</h4>
-		<p>
-			One useful visualization technique to clearly observe the distribution of the stations is to plot them in a map. In this section we wil do
-			exactly them, grouping the stations by differents criteria.
-		</p>
+				<li>4. Once the important missing values are properly replaced, we can filter out those rows that present any null value.
+					<img class="img-responsive " src="img/cledrop.png" alt="">
+				</li>
+				<li>5. The first modification in both columns Date Last Confirmed and Open Date is needed. The string format will be modified so pandas 
+					can later convert them properly to a datetime type. To achieve this we map a previously defined function throughout each column.
+					<img class="img-responsive " src="img/cle1.png" alt="">
+					<img class="img-responsive " src="img/cle7.png" alt="">
+				</li>
+				<li>6. Now that the date strings are in the correct format, pandas can easily transform the into a datetime type.
+					Moreover, within this same assign method we will modify both the Longitude and the Latitude columns, dividing each element by one million, 
+					so visualization libraries can use plot each data point correctly, among other advantages. Finally, the ZIP column that originally was a float
+					type will be converted into an integer, as it has no decimal positions.
+					<img class="img-responsive " src="img/cle8.png" alt="">
+				</li>
+				<li>7. As explained before, there are some data points that had wrong geographical coordinates. By limiting the longitude range we
+					make sure this points are filtered out.
+					<img class="img-responsive " src="img/cle9.png" alt="">
+				</li>
+				
 
+			</ol>
+		</div>
+
+		<br>
+		<div id="cle">
+			<h4>Visualization</h4>
+			<p>
+				Once our dataset is cleaned we can plot in a map the different fuel stations locations, grouping them by differents criteria.
+				In first place, we will divide them by their fuel type.
+			</p>
+			<img class="img-responsive " src="img/viz1.png" alt="">
+			<img class="img-responsive " src="img/viz2.png" alt="">
+			<p>
+				In the map it is observed that the density of the alternative fuel stations is highly concentrated in cities such as Buffalo, Rochester,
+				Albany or New York City. Inside the latter one, Manhattan district stands out for the extremely high density of electric fuel stations.
+				Moreover, it is also noted that along all the Long Island area there is a high density of stations that provide E85 Ethanol. 
+			</p>
+			<p>
+				Another interesting plot to consider is to divide the electric fuel stations by their network. 
+			</p>
+				<img class="img-responsive " src="img/viz3.png" alt="">
+				<img class="img-responsive " src="img/viz4.png" alt="">
+			<p>
+				Zooming into the Manhattan district we can observe that the majority of the fuel stations are controlled by Tesla.
+			</p>
 		</div>
 	</div>
+</div>
 	
 	
 	
