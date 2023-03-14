@@ -11,7 +11,7 @@
     <meta name="description" content="Flatfy Free Flat and Responsive HTML5 Template ">
     <meta name="author" content="">
 
-    <title>Flatfy – Free Flat and Responsive HTML5 Template</title>
+    <title>Dataset Cleaning</title>
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -58,7 +58,7 @@
 	<!-- FullScreen -->
     <div class="intro-header">
 		<div class="col-xs-12 text-center abcen1">
-			<h1 class="h2_home wow fadeIn" data-wow-delay="0.4s">Alternative fuel stations</h1>
+			<h1 class="h2_home wow fadeIn" data-wow-delay="0.4s">Dataset Cleaning</h1>
 			<h3 class="h3_home wow fadeIn" data-wow-delay="0.6s">Cleaning a dataset about alternative fuel stations in New York</h3>
 			<ul class="list-inline intro-social-buttons">
 				<li id="download" ><a href="#downloadlink" class="btn  btn-lg mybutton_standard wow swing wow fadeIn" data-wow-delay="1.2s"><span class="network-name">Go to code</span></a>
@@ -83,17 +83,16 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#home">Alternative fuel stations in NY</a>
+				<a class="navbar-brand" href="#home">By Pablo Chiva</a>
 			</div>
 
 			<div class="collapse navbar-collapse navbar-right navbar-ex1-collapse">
 				<ul class="nav navbar-nav">
 					
-					<li class="menuItem"><a href="#whatis">What is?</a></li>
-					<li class="menuItem"><a href="#useit">Use It</a></li>
-					<li class="menuItem"><a href="#screen">Screenshot</a></li>
-					<li class="menuItem"><a href="#credits">Credits</a></li>
-					<li class="menuItem"><a href="#contact">Contact</a></li>
+					<li class="menuItem"><a href="#whatis">Prerequisites</a></li>
+					<li class="menuItem"><a href="#useit">Exploration</a></li>
+					<li class="menuItem"><a href="#screen">Cleaning</a></li>
+					<li class="menuItem"><a href="#credits">Visualizaton</a></li>
 				</ul>
 			</div>
 		   
@@ -104,17 +103,86 @@
 	<div id="whatis" class="content-section-b" style="border-top: 0">
 		<div class="container">
 
-			<div class="col-md-6 col-md-offset-3 text-center wrap_title">
-				<h2>What is?</h2>
-				<p class="lead" style="margin-top:0">A special thanks to Death.</p>
+			<div class="col-md-6 col-md-offset-3 text-center">
+				<h3>Alternative Fuel Stations in New York</h3>
+				<p class="lead" style="margin-top:0">Cleaning a dataset</p>
 				
 			</div>
+
+			
 			
 			
 		</div>
+		<div class="container">
+		<p>	Alternative fuels, such as electric, hydrogen, and natural gas, are increasingly becoming popular as a more sustainable and environmentally
+			friendly source of energy. It is important for car owners to have access to reliable information of the locations and characteristics of
+			fuel stations that can satisify their needs. Moreover, for data scientists, having access to clean data about this type of fuel stations
+			can be useful for application such as optimal stations locations. 
+			
+			In this case we will tidy up a dataset extracted from the <a href="https://data.ny.gov/Energy-Environment/Alternative-Fuel-Stations-in-New-York-Map/bfn6-ppz4">official website</a> 
+			of New York State. Like most public datasets, the information regarding these stations is incomplete, contains format errors, which can make it difficult to
+			analyze or use the data effectively. In this article, we will explore the process of cleaning a dataset, discussing the common issues
+			that may arise and the techniques that can be used to address them.
+
+			Although the main part of this article will be focused on the cleaning of the dataset, a brief exploration will be proposed aswell as 
+			some geospatial visualizations at the end to make the process more interesting and give it some context.
+		</p>
+
+		<br>
+		<h4>Prerequisites</h4>
+		<p>
+			We will start by importing the necessary libraries. Those are pandas, to handle the data; re to manipulate strings using regular expressions
+			and plotly.express for geospatial visualization purposes.
+		</p>
+
+		<img class="img-responsive " src="img/pre1.png" alt="">
+		<p>
+			Secondly we will load the data to the notebook, and the load it to a pandas dataframe
+		</p>
+		<img class="img-responsive " src="img/pre2.png" alt="">
+
+		<h4>Exploration</h4>
+		<p>
+			Next step is to explore briefly the dataset to have an idea of which the main problems are and start to think on how to address them.
+			The sample method is useful to get a quick view of some random rows of the dataset.
+		</p>
+		<img class="img-responsive " src="img/exp0.png" alt="">
+		<p>
+			However, using the info method provides more useful information such as the number of non-null variables per colums, the data type of each 
+			variable or the dimensions of the matrix			
+		</p>
+		<img class="img-responsive " src="img/exp1.png" alt="">
+		<img class="img-responsive " src="img/exp2.png" alt="">
+		<img class="img-responsive " src="img/exp4.png" alt="">
+		
+
+		<h4>Cleaning</h4>
+		<p>
+			Once the exploration of the dataset is complete and the main issues are located, it is time to start with the cleaning process. It is
+			important to note that new issues will probably come out after the initial exploration and would need to be address simultaneously with
+			the cleaning process.
+		</p>
+		<img class="img-responsive " src="img/cle1.png" alt="">
+		<img class="img-responsive " src="img/cle2.png" alt="">
+		<img class="img-responsive " src="img/cle3.png" alt="">
+		<img class="img-responsive " src="img/cle4.png" alt="">
+		<img class="img-responsive " src="img/cle5.png" alt="">
+		<img class="img-responsive " src="img/cle6.png" alt="">
+		<img class="img-responsive " src="img/cledrop.png" alt="">
+		<img class="img-responsive " src="img/cle7.png" alt="">
+		<img class="img-responsive " src="img/cle8.png" alt="">
+		<img class="img-responsive " src="img/cle9.png" alt="">
+
+		<h4>Visualization</h4>
+		<p>
+			One useful visualization technique to clearly observe the distribution of the stations is to plot them in a map. In this section we wil do
+			exactly them, grouping the stations by differents criteria.
+		</p>
+
+		</div>
 	</div>
 	
-
+	
 	
     <footer>
       <div class="container">
