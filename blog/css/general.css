@@ -110,6 +110,11 @@ filter: alpha(opacity=95) !important;
 
 .item .img-responsive {cursor:url(../img/cross.png),auto;}
 
+.img-responsive{
+	margin: 15px;
+	border: 2px solid #b1adad;
+}
+
 /* Preloader */
 #preloader {
 	position: fixed;
